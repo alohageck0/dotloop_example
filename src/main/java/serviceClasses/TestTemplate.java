@@ -53,8 +53,7 @@ public class TestTemplate {
 
     /**
      * Method setups test case preconditions - sets Desired capabilities for Android driver,
-     * creates driver for Selenium grid "http://127.0.0.1:4444/wd/hub",
-     * stores node_port to identify which panel executes test case
+     * creates driver for Selenium grid using address from grid.properties,
      */
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method test) throws IOException {
