@@ -40,23 +40,15 @@ public class LoginTests extends TestTemplate {
     * Login test case
     */
 //   @Test(groups = {"login", "smoke"}, dataProvider = "usernames", dataProviderClass = MySQLDataProviders.class, dependsOnMethods = {"clickSignIn"})
-   @Test(groups = {"login", "smoke"})
+   @Test(groups = {"login", "smoke"}, dependsOnMethods = {"clickSignIn"})
    public void login() {
 //   public void login(String username, String password) {
       String username = "iavorovich@gmail.com";
       String password = "qolsys123";
       logger.info("login test case started");
-      getWebDriver().navigate().to("https://dotloop.com/");
-      logger.info("Home page opened");
-
-      HomePage homePage = new HomePage(getWebDriver());
-      homePage.getSignIn().click();
-      logger.info("Sign in clicked");
+      clickSignIn();
 
       SignInPage signInPage = new SignInPage(getWebDriver());
-      Assert.assertEquals(signInPage.getLoginPageTitle().getText(), "Welcome to dotloop.");
-      logger.info("Sign in page opened");
-
       signInPage.getUsernameTextfield().sendKeys(username);
       logger.info("Username " + username + " entered");
 
@@ -77,18 +69,19 @@ public class LoginTests extends TestTemplate {
 
    }
 
-////   @Test(groups = {"login", "smoke"})
-//   public void clickSignIn() {
-//      logger.info("clickSignIn test case started");
-//      getWebDriver().navigate().to("https://evernote.com/");
-//      logger.info("Home page opened");
-//
-//      HomePage homePage = new HomePage(getWebDriver());
-//      homePage.getSignIn().click();
-//      logger.info("Sign in clicked");
-//
-//      Assert.assertEquals(homePage.getSignInPopupTitle().getText(), "Sign in");
-//      logger.info("Sign in pop up opened");
-//   }
+   @Test(groups = {"login", "smoke"})
+   public void clickSignIn() {
+      logger.info("clickSignIn test case started");
+      getWebDriver().navigate().to("https://dotloop.com/");
+      logger.info("Home page opened");
+
+      HomePage homePage = new HomePage(getWebDriver());
+      homePage.getSignIn().click();
+      logger.info("Sign in clicked");
+
+      SignInPage signInPage = new SignInPage(getWebDriver());
+      Assert.assertEquals(signInPage.getLoginPageTitle().getText(), "Welcome to dotloop.");
+      logger.info("Sign in page opened");
+   }
 
 }
