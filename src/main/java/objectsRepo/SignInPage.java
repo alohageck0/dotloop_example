@@ -25,6 +25,13 @@ public class SignInPage extends PageTemplate {
     @FindBy(xpath = ".//*[@id='forms']/div/h1")
     private WebElement loginPageTitle;
 
+    @FindBy(xpath = "html/body/section[2]/div[3]/div/p")
+    private WebElement errorMessage;
+
+    public WebElement getErrorMessage() {
+        return errorMessage;
+    }
+
     public WebElement getLoginPageTitle() {
         return loginPageTitle;
     }

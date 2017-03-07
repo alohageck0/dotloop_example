@@ -12,7 +12,6 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
@@ -29,7 +28,7 @@ public class TestTemplate {
     private File appDir = new File("src");
     private MyConfig config = new MyConfig();
     private RemoteWebDriver webDriver;
-    protected Logger logger = Logger.getLogger("SettingsTests");
+    protected Logger logger = Logger.getLogger(this.getClass().getName());
     private Properties properties = new Properties();
     private WebDriverWait wait;
 
@@ -56,7 +55,7 @@ public class TestTemplate {
      * creates driver for Selenium grid using address from grid.properties,
      */
     @BeforeMethod(alwaysRun = true)
-    public void setUp(Method test) throws IOException {
+    public void setUp() throws IOException {
         File homedir = new File(System.getProperty("user.home"));
         properties.load(new BufferedInputStream(new FileInputStream(homedir + "/Automation/grid.properties")));
         logger.info("Selenium grid server address: " + properties.getProperty("serveraddress"));
@@ -67,9 +66,10 @@ public class TestTemplate {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown(Method test) throws IOException {
+    public void tearDown() throws IOException {
         try {
             webDriver.quit();
+            logger.info("webdriver quit");
         } catch (NullPointerException e) {
             logger.info("No webDriver");
         }

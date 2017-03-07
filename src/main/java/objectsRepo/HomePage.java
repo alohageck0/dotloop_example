@@ -13,8 +13,14 @@ public class HomePage extends PageTemplate {
     @FindBy(xpath = ".//*[@id='myTopnav']/div/div[2]/li[6]/a")
     private WebElement signIn;
 
+    @FindBy(xpath = "Broken Xpath")
+    private WebElement signInBroken;
 
     public WebElement getSignIn() {
         return signIn;
+    }
+
+    public WebElement getSignInBroken() {
+        return signInBroken;
     }
 }

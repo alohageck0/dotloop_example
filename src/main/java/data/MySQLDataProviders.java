@@ -25,6 +25,17 @@ public class MySQLDataProviders {
       return getObjects(query);
    }
 
+   /**
+    * Method to get user with invalid password Data from database.
+    * Returns two-dimensions array, each subarray contains node_port, adb_panel_id, adc_customer_id, adc_user_login, adc_user_password
+    */
+   @DataProvider
+   public static Object[][] invalidUser() {
+
+      String query = "select * from Credentials where password='password';";
+      return getObjects(query);
+   }
+
    private static Object[][] getObjects(String query) {
       Object[][] data = null;
       int rowCount = 0;
@@ -51,6 +62,7 @@ public class MySQLDataProviders {
       }
       return data;
    }
+
 
 
 }
